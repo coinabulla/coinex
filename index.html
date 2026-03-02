@@ -742,7 +742,7 @@
     let totalLtc = 0;
     let adTimer;
     let timeRemaining = 30;
-    const AD_DIRECT_LINK = "https://www.effectivegatecpm.com/pf2s6zu5v?key=a75c37f92fa2b0ac92fc03d0718ecfcd";
+    const AD_DIRECT_LINK = "https://www.effectivegatecpm.com/mrfcasix?key=68df0573be92789eaecf20f5ee5900f5";
     const MIN_REWARD = 0.00000700;
     const MAX_REWARD = 0.00000800;
     const LTC_WALLET_MIN_LENGTH = 26;
@@ -795,7 +795,15 @@
         const startBtn = document.getElementById('start-ad-btn');
         const timer = document.getElementById('timer');
         
-        window.open(AD_DIRECT_LINK, '_blank');
+        // buka link pakai <a> + noopener
+    const link = document.createElement('a');
+    link.href = AD_DIRECT_LINK;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
         startBtn.disabled = true;
         timer.style.display = 'block';
         document.getElementById('reward-msg').style.display = 'none';
@@ -878,5 +886,6 @@
 </script>
 </body>
 </html>
+
 
 
