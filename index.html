@@ -1,896 +1,809 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Earn LTC - Watch Ads, Get Paid</title>
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>CineInfo - Info & Ulasan Film Legal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        /* Reset & Base Style */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        :root {
-            --primary: #0066CC;
-            --secondary: #36B37E;
-            --dark: #1A1A1A;
-            --light: #F5F7FA;
-            --gray: #6B7280;
-            --border: #E2E8F0;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        html {
             scroll-behavior: smooth;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+            line-height: 1.6;
         }
 
-        /* Navigation Bar */
-        nav {
-            background-color: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            padding: 1rem 0;
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Iklan Top Banner */
+        .ad-top-banner {
+            background-color: #1e293b;
+            padding: 12px 0;
+            text-align: center;
+            border-bottom: 2px solid #3b82f6;
+        }
+
+        .ad-top-banner a {
+            display: inline-block;
+            width: 100%;
+            max-width: 728px;
+            height: 90px;
+            background-color: #2d3748;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-weight: 600;
+            border: 1px dashed #475569;
+        }
+
+        /* Header */
+        header {
+            background-color: #1e293b;
+            padding: 15px 0;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        .nav-content {
+        .header-content {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            gap: 1rem;
+            justify-content: space-between;
         }
 
         .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3b82f6;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--primary);
         }
 
         .logo i {
-            font-size: 1.75rem;
+            margin-right: 10px;
         }
 
-        /* Hamburger Toggle Button */
-        .menu-toggle {
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border-radius: 25px;
+            border: none;
+            background-color: #2d3748;
+            color: #f1f5f9;
+            outline: none;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
             background: none;
             border: none;
-            font-size: 1.75rem;
-            color: var(--primary);
+            color: #94a3b8;
             cursor: pointer;
-            display: flex;
-            align-items: center;
+        }
+
+        .nav-menu {
+            display: none;
+            gap: 20px;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: #3b82f6;
+        }
+
+        .menu-toggle {
+            font-size: 1.5rem;
+            cursor: pointer;
         }
 
         /* Mobile Menu */
         .mobile-menu {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 280px;
-            height: 100vh;
-            background-color: white;
-            box-shadow: -2px 0 8px rgba(0,0,0,0.15);
-            padding: 2rem 1.5rem;
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 101;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            display: none;
+            background-color: #1e293b;
+            padding: 15px 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
         .mobile-menu.active {
-            transform: translateX(0);
-        }
-
-        .menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--dark);
-            cursor: pointer;
-        }
-
-        .nav-link {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border);
-            transition: color 0.3s ease;
-        }
-
-        .nav-link.active, .nav-link:hover {
-            color: var(--primary);
-        }
-
-        /* Penyesuaian Posisi Balance Badge */
-        .balance-container {
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .balance-badge {
-            background-color: var(--primary);
-            color: white;
-            padding: 0.75rem 1.25rem;
-            border-radius: 9999px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            width: 90%;
-            justify-content: center;
-        }
-
-        /* Overlay When Menu Open */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(0,0,0,0.5);
-            display: none;
-            z-index: 100;
-        }
-
-        .overlay.active {
             display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid #2d3748;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
         }
 
         /* Hero Section */
         .hero {
-            padding: 4rem 0;
+            height: 400px;
+            background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.9)), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
             text-align: center;
-            background: linear-gradient(135deg, var(--primary) 0%, #004494 100%);
-            color: white;
-            margin-bottom: 3rem;
+            margin-bottom: 30px;
         }
 
-        .hero h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            line-height: 1.2;
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #3b82f6;
         }
 
-        .hero p {
+        .hero-content p {
             font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 20px;
         }
 
         .cta-btn {
-            background-color: white;
-            color: var(--primary);
-            padding: 1rem 2rem;
-            border-radius: 8px;
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #3b82f6;
+            border-radius: 25px;
             font-weight: 600;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .cta-btn:hover {
+            background-color: #2563eb;
             transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
         }
 
-        /* Card Components */
-        .card {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
-        .card:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+        /* Movie Section */
+        .movie-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            color: var(--dark);
         }
 
-        .card-title i {
-            color: var(--primary);
-            font-size: 1.25rem;
+        .movie-section h2 i {
+            margin-right: 10px;
+            color: #3b82f6;
         }
 
-        /* Section Visibility */
-        .content-section {
-            display: none;
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
         }
 
-        .content-section.active {
-            display: block;
+        .movie-card {
+            background-color: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
         }
 
-        /* Home Section Styles */
-        .ad-info {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--gray);
+        .movie-card:hover {
+            transform: translateY(-5px);
         }
 
-        .ad-info .reward-range {
-            color: var(--primary);
-            font-weight: 600;
+        .movie-poster img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .movie-info {
+            padding: 15px;
+        }
+
+        .movie-title {
             font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        .btn-group {
+        .movie-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 12px;
+        }
+
+        .movie-cta {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-review, .btn-watch {
+            flex: 1;
+            padding: 8px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .btn-review {
+            background-color: #475569;
+        }
+
+        .btn-watch {
+            background-color: #3b82f6;
+        }
+
+        .btn-review:hover, .btn-watch:hover {
+            opacity: 0.9;
+        }
+
+        /* Sidebar Ads */
+        .sidebar {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 1rem;
+            gap: 25px;
         }
 
-        .action-btn {
+        .ad-sidebar-banner {
+            background-color: #1e293b;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            border: 1px dashed #475569;
+        }
+
+        .ad-sidebar-banner a {
+            display: block;
             width: 100%;
-            max-width: 300px;
-            padding: 1rem;
-            border-radius: 8px;
-            border: none;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            height: 250px;
+            margin-bottom: 10px;
+            background-color: #2d3748;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.75rem;
+            color: #3b82f6;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
+        .ad-sidebar-banner small {
+            color: #94a3b8;
         }
 
-        .btn-primary:disabled {
-            background-color: var(--gray);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-color: #004494;
-            transform: translateY(-2px);
-        }
-
-        .btn-success {
-            background-color: var(--secondary);
-            color: white;
-        }
-
-        .btn-success:hover {
-            background-color: #258B64;
-            transform: translateY(-2px);
-        }
-
-        .timer-box {
-            background-color: var(--light);
-            padding: 1rem;
-            border-radius: 8px;
+        /* Iklan Middle Banner */
+        .ad-middle-banner {
+            background-color: #1e293b;
+            padding: 15px;
+            border-radius: 10px;
             text-align: center;
-            margin: 1rem 0;
-            color: var(--dark);
-            font-weight: 500;
-            display: none;
+            margin: 30px 0;
+            border: 1px dashed #475569;
         }
 
-        .reward-alert {
-            background-color: rgba(54, 179, 126, 0.1);
-            color: var(--secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .withdrawal-section {
-            margin-top: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
-        }
-
-        .form-input {
+        .ad-middle-banner a {
+            display: inline-block;
             width: 100%;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            background-color: var(--light);
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background-color: white;
-        }
-
-        .error-text {
-            color: #E53E3E;
-            font-size: 0.875rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        .withdrawal-alert {
-            background-color: rgba(0, 102, 204, 0.1);
-            color: var(--primary);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        /* Terms, Privacy, Contact Section Styles */
-        .section-content {
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        .section-content h3 {
-            color: var(--dark);
-            font-size: 1.2rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-content ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-form .form-input {
-            margin-bottom: 1rem;
-        }
-
-        .contact-form textarea {
-            height: 150px;
-            resize: vertical;
+            max-width: 970px;
+            height: 90px;
+            background-color: #2d3748;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-weight: 600;
         }
 
         /* Footer */
         footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 2rem 0;
+            background-color: #1e293b;
+            padding: 30px 0;
+            border-top: 2px solid #3b82f6;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #3b82f6;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #94a3b8;
+        }
+
+        .footer-section a:hover {
+            color: #3b82f6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            font-size: 1.5rem;
+            margin-top: 15px;
+        }
+
+        .copyright {
             text-align: center;
-            margin-top: 3rem;
+            padding-top: 20px;
+            border-top: 1px solid #2d3748;
+            color: #94a3b8;
+            font-size: 0.9rem;
         }
 
-        .footer-text {
-            font-size: 0.875rem;
-            opacity: 0.8;
+        /* Popunder Ad (Style Dasar) */
+        #popunder-ad {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e293b;
+            width: 350px;
+            max-width: 90%;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 9999;
         }
 
-        /* Desktop View Adjustment */
+        #popunder-ad.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .popunder-content {
+            text-align: center;
+        }
+
+        .popunder-content a {
+            display: block;
+            width: 100%;
+            height: 200px;
+            background-color: #2d3748;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+        }
+
+        .close-popunder {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Responsive Breakpoints */
         @media (min-width: 768px) {
+            .nav-menu {
+                display: flex;
+            }
+
             .menu-toggle {
                 display: none;
             }
 
             .mobile-menu {
-                position: static;
-                width: auto;
-                height: auto;
-                background: none;
-                box-shadow: none;
-                padding: 0;
-                transform: translateX(0);
+                display: none !important;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
                 flex-direction: row;
-                gap: 1.5rem;
-                align-items: center;
+                overflow-x: auto;
+                padding-bottom: 15px;
             }
 
-            .menu-header, .close-btn, .balance-container {
-                display: none;
+            .ad-sidebar-banner {
+                min-width: 250px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .movie-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             }
 
-            .nav-link {
-                border-bottom: none;
-                padding: 0.5rem 0;
+            .movie-poster img {
+                height: 280px;
             }
 
-            .balance-badge {
-                margin: 0 0 0 1.5rem;
-                width: auto;
-                padding: 0.5rem 1rem;
+            .hero {
+                height: 300px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Overlay for Mobile Menu -->
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <!-- Iklan Top Banner (728x90 Standar) -->
+    <div class="ad-top-banner">
+        <a href="LINK_IKLAN_ANDA" target="_blank" rel="noopener noreferrer">
+            [TEMPATKAN BANNER IKLAN 728x90 DISINI]
+        </a>
+    </div>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="container nav-content">
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
             <div class="logo">
-                <i class="fab fa-litecoin"></i>
-                <span>EarnLTC</span>
+                <i class="fas fa-film"></i> CineInfo
             </div>
-
-            <!-- Hamburger Toggle Button -->
-            <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()">
+            <div class="search-box">
+                <input type="text" placeholder="Cari film, aktor, atau sutradara...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="nav-menu">
+                <a href="#terbaru"><i class="fas fa-clock"></i> Terbaru</a>
+                <a href="#populer"><i class="fas fa-fire"></i> Populer</a>
+                <a href="#ulasan"><i class="fas fa-star"></i> Ulasan</a>
+                <a href="#platform"><i class="fas fa-play-circle"></i> Platform Legal</a>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- Mobile/Desktop Menu -->
-            <div class="mobile-menu" id="mobile-menu">
-                <div class="menu-header">
-                    <h3>Menu</h3>
-                    <button class="close-btn" onclick="toggleMenu()">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-
-                <a href="#home" class="nav-link active" onclick="showSection('home'); toggleMenu()">Home</a>
-                <a href="#terms" class="nav-link" onclick="showSection('terms'); toggleMenu()">Terms of Service</a>
-                <a href="#privacy" class="nav-link" onclick="showSection('privacy'); toggleMenu()">Privacy Policy</a>
-                <a href="#contact" class="nav-link" onclick="showSection('contact'); toggleMenu()">Contact Support</a>
-
-                <!-- Penyesuaian Posisi Balance Badge -->
-                <div class="balance-container">
-                    <div class="balance-badge">
-                        <i class="fab fa-litecoin"></i>
-                        <span id="total-ltc">0.00000000</span> LTC
-                    </div>
-                </div>
             </div>
         </div>
-    </nav>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#terbaru"><i class="fas fa-clock"></i> Terbaru</a>
+            <a href="#populer"><i class="fas fa-fire"></i> Populer</a>
+            <a href="#ulasan"><i class="fas fa-star"></i> Ulasan</a>
+            <a href="#platform"><i class="fas fa-play-circle"></i> Platform Legal</a>
+        </div>
+    </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h1>Turn Ad Views Into Litecoin</h1>
-            <p>Watch ads in your free time and earn real Litecoin (LTC) – no hidden fees, no minimum balance to withdraw.</p>
-            <button class="cta-btn" onclick="scrollToAdSection()">
-                <i class="fas fa-play-circle"></i>
-                Start Earning Now
-            </button>
+        <div class="container hero-content">
+            <h1>Informasi Film Terlengkap & Terpercaya</h1>
+            <p>Nikmati ulasan mendalam, jadwal tayang, dan akses ke platform streaming legal terbaik untuk menikmati film favoritmu!</p
         </div>
     </section>
 
-    <!-- Main Content Sections -->
-    <main class="container">
-        <!-- Home Section (Active by Default) -->
-        <section id="home" class="content-section active">
-            <div class="card-grid">
-                <!-- Earn LTC Card -->
-                <div class="card" id="ad-section-card">
-                    <h2 class="card-title">
-                        <i class="fas fa-tv"></i>
-                        Watch Ads & Earn
-                    </h2>
-                    <div class="ad-info">
-                        <p>Open the ad link and stay on page for <strong>30 seconds</strong> to get rewarded.</p>
-                        <p class="reward-range">Reward per ad: 0.00000700 – 0.00000800 LTC</p>
-                    </div>
-                    <div class="timer-box" id="timer">
-                        <i class="fas fa-clock"></i>
-                        Time remaining: <span id="time-left">30</span> seconds
-                    </div>
-                    <div class="btn-group">
-                        <button id="start-ad-btn" class="action-btn btn-primary" onclick="openAdLink()">
-                            <i class="fas fa-external-link-alt"></i>
-                            Open Ad Link
-                        </button>
-                        <button id="claim-btn" class="action-btn btn-success" style="display: none;" onclick="claimReward()">
-                        <i class="fas fa-gift"></i>
-                        Claim LTC Reward
-                    </button>
-                </div>
-                <div class="reward-alert" id="reward-msg">
-                    <i class="fas fa-check-circle"></i>
-                    <p>Earned this session: <span id="session-reward">0.00000000</span> LTC</p>
-                    <p>Updated balance: <span id="updated-total">0.00000000</span> LTC</p>
-                </div>
-            </div>
-           
-            <!-- Withdraw LTC Card -->
-            <div class="card">
-                <h2 class="card-title">
-                    <i class="fas fa-wallet"></i>
-                    Withdraw Your LTC
-                </h2>
-                <form id="withdrawal-form" onsubmit="processWithdrawal(); return false;">
-                    <div class="form-group">
-                        <label for="ltc-wallet" class="form-label">Litecoin Wallet Address</label>
-                        <input 
-                            type="text" 
-                            id="ltc-wallet" 
-                            class="form-input" 
-                            placeholder="Enter your LTC wallet address (starts with L/M/3)"
-                        >
-                        <div class="error-text" id="wallet-error">Please enter a valid LTC wallet address</div>
-                    </div>
-                    <button id="withdraw-btn" class="action-btn btn-primary" disabled>
-                        <i class="fas fa-paper-plane"></i>
-                        Withdraw All LTC
-                    </button>
-                </form>
-                <div class="withdrawal-alert" id="withdrawal-msg">
-                    <i class="fas fa-check-circle"></i>
-                    <p>Withdrawal successful!</p>
-                    <p>Sent to: <span id="target-wallet">-</span></p>
-                    <p>Amount sent: <span id="sent-amount">-</span> LTC</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- How It Works Card -->
-        <div class="card">
-            <h2 class="card-title">
-                <i class="fas fa-info-circle"></i>
-                How It Works
-            </h2>
-            <div style="display: grid; gap: 1rem;">
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <i class="fas fa-check-circle" style="color: var(--secondary); margin-top: 0.25rem;"></i>
-                    <div>
-                        <h3 style="font-size: 1rem; font-weight: 600;">Earn Fairly</h3>
-                        <p style="color: var(--gray); font-size: 0.9rem;">Watch ads fully to get random rewards between 0.00000700 – 0.00000800 LTC.</p>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <i class="fas fa-check-circle" style="color: var(--secondary); margin-top: 0.25rem;"></i>
-                    <div>
-                        <h3 style="font-size: 1rem; font-weight: 600;">Withdraw Anytime</h3>
-                        <p style="color: var(--gray); font-size: 0.9rem;">No minimum balance – withdraw all your earnings to your LTC wallet.</p>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <i class="fas fa-check-circle" style="color: var(--secondary); margin-top: 0.25rem;"></i>
-                    <div>
-                        <h3 style="font-size: 1rem; font-weight: 600;">Stay Compliant</h3>
-                        <p style="color: var(--gray); font-size: 0.9rem;">Only use legitimate ad links – no bots or shortcuts allowed.</p>
-                    </div>
-                </div>
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <i class="fas fa-check-circle" style="color: var(--secondary); margin-top: 0.25rem;"></i>
-                    <div>
-                        <h3 style="font-size: 1rem; font-weight: 600;">Secure Transactions</h3>
-                        <p style="color: var(--gray); font-size: 0.9rem;">Double-check your wallet address – withdrawals cannot be reversed.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Terms of Service Section -->
-    <section id="terms" class="content-section">
-        <div class="card">
-            <h2 class="card-title">
-                <i class="fas fa-file-contract"></i>
-                Terms of Service
-            </h2>
-            <div class="section-content">
-                <p>Last updated: February 26, 2026</p>
-                
-                <h3>1. Acceptance of Terms</h3>
-                <p>By accessing or using the EarnLTC platform, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any part of these terms, you must not use our service.</p>
-                
-                <h3>2. Eligibility</h3>
-                <p>You must be at least 18 years old and have the legal capacity to enter into these terms to use our service. We reserve the right to refuse service to anyone at any time for any reason.</p>
-                
-                <h3>3. User Responsibilities</h3>
-                <ul>
-                    <li>You agree not to use bots, scripts, or automated tools to access or use the platform.</li>
-                    <li>You must not share false or misleading information when registering or withdrawing rewards.</li>
-                    <li>You are responsible for maintaining the security of your account and wallet address.</li>
-                </ul>
-                
-                <h3>4. Reward and Withdrawal Rules</h3>
-                <ul>
-                    <li>Rewards are granted only after completing ad viewing requirements (30 seconds minimum).</li>
-                    <li>Withdrawals are processed manually or automatically (depending on volume) within 1-3 business days.</li>
-                    <li>We are not responsible for lost funds due to incorrect wallet addresses.</li>
-                </ul>
-                
-                <h3>5. Termination</h3>
-                <p>We may terminate or suspend your access to the platform immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms of Service.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Privacy Policy Section -->
-    <section id="privacy" class="content-section">
-        <div class="card">
-            <h2 class="card-title">
-                <i class="fas fa-shield-alt"></i>
-                Privacy Policy
-            </h2>
-            <div class="section-content">
-                <p>Last updated: February 26, 2026</p>
-                
-                <h3>1. Information We Collect</h3>
-                <ul>
-                    <li><strong>Personal Information:</strong> We do not collect personal data such as names, emails, or phone numbers – only your Litecoin wallet address for withdrawals.</li>
-                    <li><strong>Usage Data:</strong> We may collect information about how you access and use the platform (e.g., device type, browser version, ad links viewed).</li>
-                </ul>
-                
-                <h3>2. How We Use Your Information</h3>
-                <p>We use collected information only for the following purposes:</p>
-                <ul>
-                    <li>To process and complete withdrawal requests.</li>
-                    <li>To improve the performance and usability of the platform.</li>
-                    <li>To detect and prevent fraudulent activity.</li>
-                </ul>
-                
-                <h3>3. Data Security</h3>
-                <p>We implement appropriate security measures to protect against unauthorized access, alteration, disclosure, or destruction of your information. However, no method of transmission over the internet or electronic storage is 100% secure.</p>
-                
-                <h3>4. Sharing Your Information</h3>
-                <p>We do not sell, trade, or otherwise transfer your information to third parties except:</p>
-                <ul>
-                    <li>To process withdrawals (your wallet address is shared only with blockchain networks).</li>
-                    <li>When required by law or to protect our rights, property, or safety.</li>
-                </ul>
-                
-                <h3>5. Changes to This Policy</h3>
-                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Support Section -->
-    <section id="contact" class="content-section">
-        <div class="card">
-            <h2 class="card-title">
-                <i class="fas fa-headset"></i>
-                Contact Support
-            </h2>
-            <div class="section-content">
-                <p>Have questions or issues? Fill out the form below and we'll respond within 24-48 business hours.</p>
-                
-                <form class="contact-form" onsubmit="submitContactForm(); return false;">
-                    <div class="form-group">
-                        <label for="contact-subject" class="form-label">Subject</label>
-                        <input type="text" id="contact-subject" class="form-input" placeholder="e.g., Withdrawal Issue, Reward Not Received" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="contact-details" class="form-label">Details (Include Wallet Address if Applicable)</label>
-                        <textarea id="contact-details" class="form-input" placeholder="Describe your issue in detail..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="action-btn btn-primary">
-                        <i class="fas fa-paper-plane"></i>
-                        Send Message
-                    </button>
-                </form>
-                
-                <div class="reward-alert" id="contact-success" style="display: none;">
-                    <i class="fas fa-check-circle"></i>
-                    <p>Your message has been sent successfully! We'll get back to you soon.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <p>&copy; 2026 EarnLTC. All Rights Reserved.</p>
-        <p class="footer-text">Litecoin is a registered trademark of the Litecoin Foundation.</p>
+    <!-- Iklan Middle Banner (970x90 Standar) -->
+    <div class="container ad-middle-banner">
+        <a href="LINK_IKLAN_ANDA" target="_blank" rel="noopener noreferrer">
+            [TEMPATKAN BANNER IKLAN 970x90 DISINI]
+        </a>
     </div>
-</footer>
 
-<!-- JavaScript Functionality -->
-<script>
-    let totalLtc = 0;
-    let adTimer;
-    let timeRemaining = 30;
-    const AD_DIRECT_LINK = "https://www.effectivegatecpm.com/mrfcasix?key=68df0573be92789eaecf20f5ee5900f5";
-    const MIN_REWARD = 0.00000700;
-    const MAX_REWARD = 0.00000800;
-    const LTC_WALLET_MIN_LENGTH = 26;
+    <!-- Main Content -->
+    <main class="container main-content">
+        <div class="movie-section" id="terbaru">
+            <h2><i class="fas fa-clock"></i> Film Terbaru</h2>
+            <div class="movie-grid">
+                <!-- Kartu Film 1 -->
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/119/400/600" alt="Film Terbaru 1">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Guardians of the Galaxy Vol. 3</h3>
+                        <div class="movie-meta">
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                            <span><i class="fas fa-star"></i> 8.2/10</span>
+                        </div>
+                        <div class="movie-cta">
+                            <a href="LINK_ULASAN_FILM" class="btn-review">Ulasan</a>
+                            <a href="LINK_PLATFORM_LEGAL" class="btn-watch" target="_blank" rel="noopener noreferrer">Nonton</a>
+                        </div>
+                    </div>
+                </div>
 
-    // Toggle Hamburger Menu
-    function toggleMenu() {
-        const mobileMenu = document.getElementById('mobile-menu');
-        const overlay = document.getElementById('overlay');
-        mobileMenu.classList.toggle('active');
-        overlay.classList.toggle('active');
-    }
+                <!-- Kartu Film 2 -->
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/237/400/600" alt="Film Terbaru 2">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">John Wick: Chapter 4</h3>
+                        <div class="movie-meta">
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                            <span><i class="fas fa-star"></i> 8.1/10</span>
+                        </div>
+                        <div class="movie-cta">
+                            <a href="LINK_ULASAN_FILM" class="btn-review">Ulasan</a>
+                            <a href="LINK_PLATFORM_LEGAL" class="btn-watch" target="_blank" rel="noopener noreferrer">Nonton</a>
+                        </div>
+                    </div>
+                </div>
 
-    // Show Only Selected Section
-    function showSection(sectionId) {
-        const sections = document.querySelectorAll('.content-section');
-        sections.forEach(section => section.classList.remove('active'));
+                <!-- Kartu Film 3 -->
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/96/400/600" alt="Film Terbaru 3">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Spider-Man: Across the Spider-Verse</h3>
+                        <div class="movie-meta">
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                            <span><i class="fas fa-star"></i> 8.5/10</span>
+                        </div>
+                        <div class="movie-cta">
+                            <a href="LINK_ULASAN_FILM" class="btn-review">Ulasan</a>
+                            <a href="LINK_PLATFORM_LEGAL" class="btn-watch" target="_blank" rel="noopener noreferrer">Nonton</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kartu Film 4 -->
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <img src="https://picsum.photos/id/177/400/600" alt="Film Terbaru 4">
+                    </div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">Oppenheimer</h3>
+                        <div class="movie-meta">
+                            <span><i class="fas fa-calendar"></i> 2023</span>
+                            <span><i class="fas fa-star"></i> 8.4/10</span>
+                        </div>
+                        <div class="movie-cta">
+                            <a href="LINK_ULASAN_FILM" class="btn-review">Ulasan</a>
+                            <a href="LINK_PLATFORM_LEGAL" class="btn-watch" target="_blank" rel="noopener noreferrer">Nonton</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar dengan Iklan -->
+        <aside class="sidebar">
+            <!-- Iklan Sidebar 1 (300x250 Standar) -->
+            <div class="ad-sidebar-banner">
+                <a href="LINK_IKLAN_ANDA" target="_blank" rel="noopener noreferrer">
+                    [TEMPATKAN BANNER IKLAN 300x250 DISINI]
+                </a>
+                <small>Iklan Rekomendasi</small>
+            </div>
+
+            <!-- Iklan Sidebar 2 (300x250 Standar) -->
+            <div class="ad-sidebar-banner">
+                <a href="LINK_IKLAN_ANDA" target="_blank" rel="noopener noreferrer">
+                    [TEMPATKAN BANNER IKLAN 300x250 DISINI]
+                </a>
+                <small>Platform Streaming Resmi</small>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Bagian Film Populer -->
+    <section class="container movie-section" id="populer">
+        <h2><i class="fas fa-fire"></i> Film Populer</h2>
+        <div class="movie-grid">
+            <!-- Kartu Film 5 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://picsum.photos/id/29/400/600" alt="Film Populer 1">
+                </div>
+                <div class="movie-info">
+                    <h3 class="movie-title">The Batman</h3>
+                    <div class="movie-meta">
+                        <span><i class="fas fa-calendar"></i> 2022</span>
+                        <span><i class="fas fa-star"></i> 7.8/10</span>
+                    </div>
+                    <div class="movie-cta">
+                        <a href="LINK_ULASAN_FILM" class="btn-review">Ulasan</a>
+                        <a href="LINK_PLATFORM_LEGAL" class="btn-watch" target="_blank" rel="noopener noreferrer">Nonton</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu Film 6 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://picsum.photos/id/65/400/600" alt="Film Populer 2">
+                </div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Top Gun: Maverick</h3>
+                    <div class="movie-meta">
+                        <span><i class="fas fa-calendar"></i> 2022</span>
+                        <span><i class="fas fa-star"></i> 8.3/10</span>
+                    </div>
+                    <div class="movie-cta">
+                        <a href="LINK_ULASAN_FILM" class="btn-review">Ulasan</a>
+                        <a href="LINK_PLATFORM_LEGAL" class="btn-watch" target="_blank" rel="noopener noreferrer">Nonton</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu Film 7 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://picsum.photos/id/76/400/600" alt="Film Populer 3">
+                </div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Avatar: The Way of Water</h3>
+                    <div class="movie-meta">
+                        <span><i class="fas fa-calendar"></i> 2022</span>
+                        <span><i class="fas fa-star"></i> 7.7/10</span>
+                    </div>
+                    <div class="movie-cta">
+                        <a href="LINK_ULASAN_FILM" class="btn-review">Ulasan</a>
+                        <a href="LINK_PLATFORM_LEGAL" class="btn-watch" target="_blank" rel="noopener noreferrer">Nonton</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu Film 8 -->
+            <div class="movie-card">
+                <div class="movie-poster">
+                    <img src="https://picsum.photos/id/133/400/600" alt="Film Populer 4">
+                </div>
+                <div class="movie-info">
+                    <h3 class="movie-title">Doctor Strange in the Multiverse of Madness</h3>
+                    <div class="movie-meta">
+                        <span><i class="fas fa-calendar"></i> 2022</span>
+                        <span><i class="fas fa-star"></i> 7.0/10</span>
+                    </div>
+                    <div class="movie-cta">
+                        <a href="LINK_ULASAN_FILM" class="btn-review">Ulasan</a>
+                        <a href="LINK_PLATFORM_LEGAL" class="btn-watch" target="_blank" rel="noopener noreferrer">Nonton</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Iklan Popunder -->
+    <div id="popunder-ad">
+        <button class="close-popunder" id="closePopunder">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="popunder-content">
+            <h4>Promo Spesial!</h4>
+            <a href="LINK_IKLAN_POPUNDER" target="_blank" rel="noopener noreferrer">
+                [TEMPATKAN IKLAN POPUNDER DISINI]
+            </a>
+            <p>Dapatkan diskon hingga 50% untuk langganan platform streaming legal!</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-film"></i> CineInfo</h3>
+                <p>Website informasi film legal yang menyediakan ulasan, jadwal tayang, dan akses ke platform streaming resmi untuk menikmati film favorit Anda.</p>
+                <div class="social-links">
+                    <a href="LINK_SOSIAL_MEDIA"><i class="fab fa-facebook"></i></a>
+                    <a href="LINK_SOSIAL_MEDIA"><i class="fab fa-instagram"></i></a>
+                    <a href="LINK_SOSIAL_MEDIA"><i class="fab fa-twitter"></i></a>
+                    <a href="LINK_SOSIAL_MEDIA"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fas fa-link"></i> Tautan Berguna</h3>
+                <a href="#terbaru">Film Terbaru</a>
+                <a href="#populer">Film Populer</a>
+                <a href="#ulasan">Ulasan Film</a>
+                <a href="#platform">Platform Legal</a>
+                <a href="#">Kebijakan Privasi</a>
+                <a href="#">Syarat & Ketentuan</a>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fas fa-play-circle"></i> Platform Streaming Legal</h3>
+                <a href="LINK_PLATFORM" target="_blank" rel="noopener noreferrer">Netflix</a>
+                <a href="LINK_PLATFORM" target="_blank" rel="noopener noreferrer">Disney+ Hotstar</a>
+                <a href="LINK_PLATFORM" target="_blank" rel="noopener noreferrer">Vidio</a>
+                <a href="LINK_PLATFORM" target="_blank" rel="noopener noreferrer">Prime Video</a>
+                <a href="LINK_PLATFORM" target="_blank" rel="noopener noreferrer">HBO Go</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2026 CineInfo - Semua hak dilindungi. Hanya konten film legal yang disediakan.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript untuk Fitur Interaktif -->
+    <script>
+        // Toggle Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
         
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => link.classList.remove('active'));
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Tampilkan Popunder Iklan setelah 5 detik
+        const popunderAd = document.getElementById('popunder-ad');
+        const closePopunder = document.getElementById('closePopunder');
         
-        document.getElementById(sectionId).classList.add('active');
-        document.querySelector(`a[href="#${sectionId}"]`).classList.add('active');
-    }
+        setTimeout(() => {
+            popunderAd.classList.add('active');
+        }, 5000); // Tampil setelah 5 detik
 
-    // Format LTC to 8 Decimal Places
-    function formatLtc(value) {
-        return value.toFixed(8);
-    }
+        // Tutup Popunder saat klik tombol close
+        closePopunder.addEventListener('click', () => {
+            popunderAd.classList.remove('active');
+        });
 
-    // Update Balance Display
-    function updateTotalDisplay() {
-        const balance = formatLtc(totalLtc);
-        document.getElementById('total-ltc').textContent = balance;
-        document.getElementById('withdraw-btn').disabled = (totalLtc <= 0);
-    }
-
-    // Validate LTC Wallet Address
-    function validateWalletAddress(address) {
-        const validPrefixes = ['L', 'M', '3'];
-        return address && validPrefixes.includes(address[0]) && address.length >= LTC_WALLET_MIN_LENGTH;
-    }
-
-    // Scroll to Ad Section
-    function scrollToAdSection() {
-        document.getElementById('ad-section-card').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Open Ad Link
-    function openAdLink() {
-        const startBtn = document.getElementById('start-ad-btn');
-        const timer = document.getElementById('timer');
-        
-        // buka link pakai <a> + noopener
-    const link = document.createElement('a');
-    link.href = AD_DIRECT_LINK;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-        startBtn.disabled = true;
-        timer.style.display = 'block';
-        document.getElementById('reward-msg').style.display = 'none';
-        document.getElementById('withdrawal-msg').style.display = 'none';
-        
-        adTimer = setInterval(() => {
-            timeRemaining--;
-            document.getElementById('time-left').textContent = timeRemaining;
-            
-            if (timeRemaining <= 0) {
-                clearInterval(adTimer);
-                timer.style.display = 'none';
-                document.getElementById('claim-btn').style.display = 'block';
+        // Tutup Popunder saat klik di luar area popunder
+        document.addEventListener('click', (e) => {
+            if (e.target === popunderAd) {
+                popunderAd.classList.remove('active');
             }
-        }, 1000);
-    }
+        });
 
-    // Claim Reward
-    function claimReward() {
-        const randomReward = MIN_REWARD + Math.random() * (MAX_REWARD - MIN_REWARD);
-        totalLtc += randomReward;
-        
-        document.getElementById('session-reward').textContent = formatLtc(randomReward);
-        document.getElementById('updated-total').textContent = formatLtc(totalLtc);
-        updateTotalDisplay();
-        
-        document.getElementById('claim-btn').style.display = 'none';
-        document.getElementById('reward-msg').style.display = 'block';
-        
-        setTimeout(() => {
-            document.getElementById('start-ad-btn').disabled = false;
-            timeRemaining = 30;
-            document.getElementById('time-left').textContent = 30;
-        }, 5000);
-    }
-
-    // Process Withdrawal
-    function processWithdrawal() {
-        const walletInput = document.getElementById('ltc-wallet');
-        const walletAddress = walletInput.value.trim();
-        const errorMsg = document.getElementById('wallet-error');
-        const withdrawalMsg = document.getElementById('withdrawal-msg');
-
-        if (!validateWalletAddress(walletAddress)) {
-            errorMsg.style.display = 'block';
-            return;
-        }
-        errorMsg.style.display = 'none';
-
-        document.getElementById('target-wallet').textContent = walletAddress;
-        document.getElementById('sent-amount').textContent = formatLtc(totalLtc);
-        withdrawalMsg.style.display = 'block';
-
-        totalLtc = 0;
-        updateTotalDisplay();
-
-        setTimeout(() => {
-            walletInput.value = '';
-            withdrawalMsg.style.display = 'none';
-        }, 7000);
-    }
-
-    // Submit Contact Form
-    function submitContactForm() {
-        const subjectInput = document.getElementById('contact-subject');
-        const detailsInput = document.getElementById('contact-details');
-        const successMsg = document.getElementById('contact-success');
-
-        subjectInput.value = '';
-        detailsInput.value = '';
-        successMsg.style.display = 'block';
-
-        setTimeout(() => {
-            successMsg.style.display = 'none';
-        }, 5000);
-    }
-
-    // Initialize on Page Load
-    window.onload = updateTotalDisplay;
-</script>
+        // Scroll Efek untuk Navbar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = '#1e293b';
+                header.style.padding = '10px 0';
+            } else {
+                header.style.backgroundColor = '#1e293b';
+                header.style.padding = '15px 0';
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
